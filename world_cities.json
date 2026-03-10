@@ -1,0 +1,88 @@
+{
+  "USA": {
+    "New York": {"lat": 40.7128, "lon": -74.0060, "timezone": "America/New_York"},
+    "Los Angeles": {"lat": 34.0522, "lon": -118.2437, "timezone": "America/Los_Angeles"},
+    "Chicago": {"lat": 41.8781, "lon": -87.6298, "timezone": "America/Chicago"},
+    "Houston": {"lat": 29.7604, "lon": -95.3698, "timezone": "America/Chicago"},
+    "Phoenix": {"lat": 33.4484, "lon": -112.0740, "timezone": "America/Phoenix"},
+    "Philadelphia": {"lat": 39.9526, "lon": -75.1652, "timezone": "America/New_York"},
+    "San Antonio": {"lat": 29.4241, "lon": -98.4936, "timezone": "America/Chicago"},
+    "San Diego": {"lat": 32.7157, "lon": -117.1611, "timezone": "America/Los_Angeles"},
+    "Dallas": {"lat": 32.7767, "lon": -96.7970, "timezone": "America/Chicago"},
+    "San Francisco": {"lat": 37.7749, "lon": -122.4194, "timezone": "America/Los_Angeles"},
+    "Seattle": {"lat": 47.6062, "lon": -122.3321, "timezone": "America/Los_Angeles"},
+    "Denver": {"lat": 39.7392, "lon": -104.9903, "timezone": "America/Denver"},
+    "Boston": {"lat": 42.3601, "lon": -71.0589, "timezone": "America/New_York"},
+    "Atlanta": {"lat": 33.7490, "lon": -84.3880, "timezone": "America/New_York"},
+    "Miami": {"lat": 25.7617, "lon": -80.1918, "timezone": "America/New_York"},
+    "Minneapolis": {"lat": 44.9778, "lon": -93.2650, "timezone": "America/Chicago"},
+    "Portland": {"lat": 45.5051, "lon": -122.6750, "timezone": "America/Los_Angeles"},
+    "Las Vegas": {"lat": 36.1699, "lon": -115.1398, "timezone": "America/Los_Angeles"},
+    "Detroit": {"lat": 42.3314, "lon": -83.0458, "timezone": "America/Detroit"},
+    "Washington DC": {"lat": 38.9072, "lon": -77.0369, "timezone": "America/New_York"}
+  },
+  "UK": {
+    "London": {"lat": 51.5074, "lon": -0.1278, "timezone": "Europe/London"},
+    "Birmingham": {"lat": 52.4862, "lon": -1.8904, "timezone": "Europe/London"},
+    "Manchester": {"lat": 53.4808, "lon": -2.2426, "timezone": "Europe/London"},
+    "Glasgow": {"lat": 55.8642, "lon": -4.2518, "timezone": "Europe/London"},
+    "Leeds": {"lat": 53.8008, "lon": -1.5491, "timezone": "Europe/London"},
+    "Sheffield": {"lat": 53.3811, "lon": -1.4701, "timezone": "Europe/London"},
+    "Edinburgh": {"lat": 55.9533, "lon": -3.1883, "timezone": "Europe/London"},
+    "Bristol": {"lat": 51.4545, "lon": -2.5879, "timezone": "Europe/London"},
+    "Leicester": {"lat": 52.6369, "lon": -1.1398, "timezone": "Europe/London"},
+    "Coventry": {"lat": 52.4068, "lon": -1.5197, "timezone": "Europe/London"}
+  },
+  "Canada": {
+    "Toronto": {"lat": 43.6532, "lon": -79.3832, "timezone": "America/Toronto"},
+    "Montreal": {"lat": 45.5017, "lon": -73.5673, "timezone": "America/Montreal"},
+    "Vancouver": {"lat": 49.2827, "lon": -123.1207, "timezone": "America/Vancouver"},
+    "Calgary": {"lat": 51.0447, "lon": -114.0719, "timezone": "America/Edmonton"},
+    "Edmonton": {"lat": 53.5461, "lon": -113.4938, "timezone": "America/Edmonton"},
+    "Ottawa": {"lat": 45.4215, "lon": -75.6972, "timezone": "America/Toronto"},
+    "Winnipeg": {"lat": 49.8951, "lon": -97.1384, "timezone": "America/Winnipeg"},
+    "Quebec City": {"lat": 46.8139, "lon": -71.2080, "timezone": "America/Toronto"},
+    "Hamilton": {"lat": 43.2557, "lon": -79.8711, "timezone": "America/Toronto"},
+    "Brampton": {"lat": 43.7315, "lon": -79.7624, "timezone": "America/Toronto"}
+  },
+  "Australia": {
+    "Sydney": {"lat": -33.8688, "lon": 151.2093, "timezone": "Australia/Sydney"},
+    "Melbourne": {"lat": -37.8136, "lon": 144.9631, "timezone": "Australia/Melbourne"},
+    "Brisbane": {"lat": -27.4698, "lon": 153.0251, "timezone": "Australia/Brisbane"},
+    "Perth": {"lat": -31.9505, "lon": 115.8605, "timezone": "Australia/Perth"},
+    "Adelaide": {"lat": -34.9285, "lon": 138.6007, "timezone": "Australia/Adelaide"},
+    "Gold Coast": {"lat": -28.0167, "lon": 153.4000, "timezone": "Australia/Brisbane"},
+    "Canberra": {"lat": -35.2809, "lon": 149.1300, "timezone": "Australia/Sydney"},
+    "Newcastle": {"lat": -32.9283, "lon": 151.7817, "timezone": "Australia/Sydney"},
+    "Hobart": {"lat": -42.8821, "lon": 147.3272, "timezone": "Australia/Hobart"},
+    "Darwin": {"lat": -12.4634, "lon": 130.8456, "timezone": "Australia/Darwin"}
+  },
+  "Singapore": {
+    "Singapore": {"lat": 1.3521, "lon": 103.8198, "timezone": "Asia/Singapore"}
+  },
+  "UAE": {
+    "Dubai": {"lat": 25.2048, "lon": 55.2708, "timezone": "Asia/Dubai"},
+    "Abu Dhabi": {"lat": 24.4539, "lon": 54.3773, "timezone": "Asia/Dubai"},
+    "Sharjah": {"lat": 25.3463, "lon": 55.4209, "timezone": "Asia/Dubai"}
+  },
+  "New Zealand": {
+    "Auckland": {"lat": -36.8509, "lon": 174.7645, "timezone": "Pacific/Auckland"},
+    "Wellington": {"lat": -41.2865, "lon": 174.7762, "timezone": "Pacific/Auckland"},
+    "Christchurch": {"lat": -43.5321, "lon": 172.6362, "timezone": "Pacific/Auckland"}
+  },
+  "Germany": {
+    "Berlin": {"lat": 52.5200, "lon": 13.4050, "timezone": "Europe/Berlin"},
+    "Munich": {"lat": 48.1351, "lon": 11.5820, "timezone": "Europe/Berlin"},
+    "Frankfurt": {"lat": 50.1109, "lon": 8.6821, "timezone": "Europe/Berlin"},
+    "Hamburg": {"lat": 53.5753, "lon": 10.0153, "timezone": "Europe/Berlin"}
+  },
+  "Netherlands": {
+    "Amsterdam": {"lat": 52.3676, "lon": 4.9041, "timezone": "Europe/Amsterdam"},
+    "Rotterdam": {"lat": 51.9244, "lon": 4.4777, "timezone": "Europe/Amsterdam"}
+  },
+  "South Africa": {
+    "Johannesburg": {"lat": -26.2041, "lon": 28.0473, "timezone": "Africa/Johannesburg"},
+    "Cape Town": {"lat": -33.9249, "lon": 18.4241, "timezone": "Africa/Johannesburg"},
+    "Durban": {"lat": -29.8587, "lon": 31.0218, "timezone": "Africa/Johannesburg"}
+  }
+}
