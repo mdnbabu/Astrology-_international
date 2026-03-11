@@ -16,7 +16,7 @@ RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
 client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
 swe.set_sid_mode(swe.SIDM_LAHIRI)
-swe.set_ephe_path(".")
+swe.set_ephe_path("ephe")
 
 nakshatras = [
     "Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra",
