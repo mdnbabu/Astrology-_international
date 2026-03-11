@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Enter Birth Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+font-family:Arial;
+background:linear-gradient(to bottom right,#e0f7ff,#f2e6ff);
+margin:0;
+padding:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+.container{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,0.15);
+width:340px;
+}
+h2{ text-align:center; color:#6a1b9a; margin-bottom:20px; }
+label{ display:block; margin-top:12px; font-weight:bold; color:#444; }
+input,select{
+width:90%;
+padding:10px;
+margin-top:5px;
+border:2px solid #ad1457;
+border-radius:6px;
+background:#e6f7ff;
+font-size:15px;
+}
+input:focus,select:focus{ border-color:#6a1b9a; outline:none; }
+.report-box{
+margin-top:15px;
+padding:12px;
+background:#f3e5f5;
+border-radius:8px;
+}
+.report-box label{ color:#4a148c; }
+.report-box select{
+width:100%;
+background:#fff;
+}
+button{
+width:100%;
+margin-top:20px;
+padding:12px;
+background:linear-gradient(to right,#ad1457,#6a1b9a);
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{ opacity:0.9; }
+</style>
+
+<script>
+function updateCities(){
+  var country = document.getElementById("country").value;
+  var citySelect = document.getElementById("place");
+  var cities = worldCities[country] || {};
+  citySelect.innerHTML = "";
+  Object.keys(cities).sort().forEach(function(city){
+    var opt = document.createElement("option");
+    opt.value = city;
+    opt.text = city;
+    citySelect.appendChild(opt);
+  });
+}
+</script>
+</head>
+<body>
+<div class="container">
+<h2>Enter Birth Details</h2>
+
+<form action="/payment" method="POST">
+
+<label>Name</label>
+<input type="text" name="name" required>
+
+<label>Day</label>
+<input type="number" name="day" min="1" max="31" required>
+
+<label>Month</label>
+<input type="number" name="month" min="1" max="12" required>
+
+<label>Year</label>
+<input type="number" name="year" min="1900" max="2100" required>
+
+<label>Time of Birth</label>
+<input type="time" name="tob" required>
+
+<label>Country</label>
+<select name="country" id="country" onchange="updateCities()" required>
+{% for country in countries %}
+<option value="{{ country }}">{{ country }}</option>
+{% endfor %}
+</select>
+
+<label>Birth City</label>
+<select name="place" id="place" required>
+{% for country, cities in world_cities.items() %}
+  {% for city in cities %}
+  <option value="{{ city }}">{{ city }}</option>
+  {% endfor %}
+{% endfor %}
+</select>
+
+<div class="report-box">
+<label>Select Report Type</label>
+<select name="report_type" required>
+<option value="basic">Basic Report — $10</option>
+<option value="detailed">Detailed Report — $100 (by Email)</option>
+</select>
+</div>
+
+<button type="submit">Proceed to Payment</button>
+
+</form>
+</div>
+
+<script>
+var worldCities = {{ world_cities | tojson }};
+updateCities();
+</script>
+</body>
+</html>
 
