@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Horoscope Result</title>
+<style>
+body{
+font-family:Arial;
+background:#f8f6ff;
+text-align:center;
+padding:40px;
+}
+.container{
+background:white;
+width:350px;
+margin:auto;
+padding:25px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+h2{ color:#6a0dad; }
+.result{ font-size:18px; margin:12px 0; }
+.label{ font-weight:bold; color:#444; }
+.value{ color:#008000; }
+.location{
+background:#e8f5e9;
+padding:10px;
+border-radius:8px;
+margin-bottom:15px;
+color:#2e7d32;
+font-weight:bold;
+}
+.detailed-note{
+margin-top:20px;
+padding:15px;
+background:#fff3e0;
+border-radius:8px;
+color:#e65100;
+font-weight:bold;
+font-size:14px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>🔮 Horoscope Result</h2>
 
+<div class="location">
+{{ name }} | {{ place }}, {{ country }}
+</div>
+
+<div class="result">
+<span class="label">Nakshatra:</span>
+<span class="value">{{ nakshatra }}</span>
+</div>
+<div class="result">
+<span class="label">Pada:</span>
+<span class="value">{{ pada }}</span>
+</div>
+<div class="result">
+<span class="label">Rasi:</span>
+<span class="value">{{ rasi }}</span>
+</div>
+<div class="result">
+<span class="label">Lagna:</span>
+<span class="value">{{ lagna }}</span>
+</div>
+<div class="result">
+<span class="label">Birth Mahadasha:</span>
+<span class="value">{{ birth_md }}</span>
+</div>
+<div class="result">
+<span class="label">Running Mahadasha:</span>
+<span class="value">{{ running_md }}</span>
+</div>
+
+<div style="margin-top:20px;padding:12px;background:#ffe0b2;border-radius:8px;font-weight:bold;">
+Saturn Status: {{ shani_status }}
+</div>
+
+{% if report_type == "detailed" %}
+<div class="detailed-note">
+✅ Your Detailed Report ($100) will be sent to your email within 24 hours by our expert astrologer.
+<br><br>
+Please email your birth details to:<br>
+<strong>vedicastrosolutionsglobal@gmail.com</strong>
+</div>
+{% else %}
+<br>
+<p style="font-size:14px;color:#666;">
+For detailed horoscope analysis — $100<br>
+Contact: vedicastrosolutionsglobal@gmail.com
+</p>
+{% endif %}
+
+</div>
+</body>
+</html>
