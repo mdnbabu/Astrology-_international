@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment - Vedic Astro Solutions</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+body{
+font-family:Arial, sans-serif;
+text-align:center;
+margin-top:50px;
+background:#f3e5f5;
+}
+.container{
+width:90%;
+max-width:400px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+h2{ color:#4a148c; }
+p{ color:#7b1fa2; margin-bottom:25px; }
+#pay-btn{
+width:100%;
+padding:20px;
+font-size:22px;
+font-weight:bold;
+background:#8e24aa;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+transition:background 0.3s;
+}
+#pay-btn:hover{ background:#6a1b9a; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>🔮 Horoscope Report</h2>
+<p>Vedic Astrology Analysis — {{ display }}</p>
+<button id="pay-btn">Pay Now ({{ display }})</button>
+</div>
 
+<script>
+var options = {
+  "key": "{{ key_id }}",
+  "amount": "{{ amount }}",
+  "currency": "USD",
+  "name": "Vedic Astro Solutions",
+  "description": "Astrology Report Payment",
+  "order_id": "{{ order_id }}",
+  "handler": function(response){
+    var form = document.createElement("form");
+    form.method = "POST";
+    form.action = "/result";
+    var input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "razorpay_payment_id";
+    input.value = response.razorpay_payment_id;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  },
+  "theme": { "color": "#8e24aa" }
+};
+var rzp = new Razorpay(options);
+document.getElementById("pay-btn").onclick = function(e){
+  rzp.open();
+  e.preventDefault();
+}
+</script>
+</body>
+</html>
