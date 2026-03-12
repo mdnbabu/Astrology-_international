@@ -66,15 +66,15 @@ def payment():
 
     report_type = request.form.get("report_type")
     if report_type == "detailed":
-        amount = 10000
-        display = "$100"
+        amount = 100
+        display = "rs1"
     else:
-        amount = 1000
-        display = "$10"
+        amount = 100
+        display = "rs1"
 
     order = client.order.create({
         "amount": amount,
-        "currency": "USD",
+        "currency": "INR",
         "payment_capture": 1
     })
 
