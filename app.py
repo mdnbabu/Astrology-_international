@@ -3,6 +3,9 @@ import json
 import razorpay
 import swisseph as swe
 import pytz
+import threading
+import requests
+import time
 
 from datetime import datetime
 from flask import Flask, render_template, request, session
@@ -16,7 +19,7 @@ RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
 client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
 swe.set_sid_mode(swe.SIDM_LAHIRI)
-swe.set_ephe_path("ephe")
+swe.set_ephe_path(".")
 
 nakshatras = [
     "Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra",
@@ -67,10 +70,10 @@ def payment():
     report_type = request.form.get("report_type")
     if report_type == "detailed":
         amount = 100
-        display = "rs1"
+        display = "Rs.1 (Test)"
     else:
         amount = 100
-        display = "rs1"
+        display = "Rs.1 (Test)"
 
     order = client.order.create({
         "amount": amount,
@@ -177,7 +180,19 @@ def result():
         country=country
     )
 
+def keep_alive():
+    while True:
+        time.sleep(600)
+        try:
+            requests.get("https://astrology-international.onrender.com")
+        except:
+            pass
+
+thread = threading.Thread(target=keep_alive)
+thread.daemon = True
+thread.start()
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-  
+    
