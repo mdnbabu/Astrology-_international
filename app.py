@@ -239,7 +239,8 @@ def result():
    @app.route("/ping")
    def ping():
     return "alive"
-if __name__ == "__main__":
+       
+   if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 10000))
 
