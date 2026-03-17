@@ -36,21 +36,14 @@ rasi_list = [
 "Tula","Vrischika","Dhanu","Makara","Kumbha","Meena"
 ]
 
-# Vimshottari dasha order
+# Dasha
 dasha_sequence = [
 "Ketu","Venus","Sun","Moon","Mars","Rahu","Jupiter","Saturn","Mercury"
 ]
 
 dasha_years = {
-"Ketu":7,
-"Venus":20,
-"Sun":6,
-"Moon":10,
-"Mars":7,
-"Rahu":18,
-"Jupiter":16,
-"Saturn":19,
-"Mercury":17
+"Ketu":7,"Venus":20,"Sun":6,"Moon":10,"Mars":7,
+"Rahu":18,"Jupiter":16,"Saturn":19,"Mercury":17
 }
 
 
@@ -61,7 +54,6 @@ def index():
 
 @app.route("/details")
 def details():
-
     try:
         with open("world_cities.json") as f:
             world_cities = json.load(f)
@@ -70,11 +62,9 @@ def details():
 
     countries = sorted(world_cities.keys())
 
-    return render_template(
-        "details.html",
-        world_cities=world_cities,
-        countries=countries
-    )
+    return render_template("details.html",
+                           world_cities=world_cities,
+                           countries=countries)
 
 
 @app.route("/payment", methods=["POST"])
@@ -104,13 +94,11 @@ def payment():
         "payment_capture": 1
     })
 
-    return render_template(
-        "payment.html",
-        order_id=order["id"],
-        key_id=RAZORPAY_KEY_ID,
-        amount=amount,
-        display=display
-    )
+    return render_template("payment.html",
+                           order_id=order["id"],
+                           key_id=RAZORPAY_KEY_ID,
+                           amount=amount,
+                           display=display)
 
 
 @app.route("/result", methods=["POST"])
@@ -145,41 +133,25 @@ def result():
     dt_local = tz.localize(dt)
     dt_utc = dt_local.astimezone(pytz.utc)
 
-    jd = swe.julday(
-        dt_utc.year,
-        dt_utc.month,
-        dt_utc.day,
-        dt_utc.hour + dt_utc.minute / 60.0
-    )
+    jd = swe.julday(dt_utc.year, dt_utc.month, dt_utc.day,
+                    dt_utc.hour + dt_utc.minute / 60.0)
 
-    moon = swe.calc_ut(
-        jd,
-        swe.MOON,
-        swe.FLG_SWIEPH | swe.FLG_SIDEREAL
-    )[0][0] % 360
+    moon = swe.calc_ut(jd, swe.MOON,
+                       swe.FLG_SWIEPH | swe.FLG_SIDEREAL)[0][0] % 360
 
-    saturn = swe.calc_ut(
-        jd,
-        swe.SATURN,
-        swe.FLG_SWIEPH | swe.FLG_SIDEREAL
-    )[0][0] % 360
+    saturn = swe.calc_ut(jd, swe.SATURN,
+                         swe.FLG_SWIEPH | swe.FLG_SIDEREAL)[0][0] % 360
 
     nak_span = 360 / 27
     nak_index = int(moon / nak_span)
 
     degrees_into_nak = moon % nak_span
-
     pada = int(degrees_into_nak / (nak_span / 4)) + 1
 
     rasi_index = int(moon / 30)
 
-    houses = swe.houses_ex(
-        jd,
-        lat,
-        lon,
-        b'P',
-        swe.FLG_SWIEPH | swe.FLG_SIDEREAL
-    )
+    houses = swe.houses_ex(jd, lat, lon, b'P',
+                           swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
 
     asc = houses[0][0] % 360
     lagna = rasi_list[int(asc / 30)]
@@ -189,62 +161,37 @@ def result():
 
     house_from_moon = (saturn_sign_num - moon_sign_num) % 12 + 1
 
-    shani_status = "No Gochara Saturn Dosha, but verify Mahadasa also"
+    shani_status = "No Gochara Saturn Dosha"
 
     if house_from_moon == 8:
-        shani_status = "Ashtama Shani (Saturn in 8th from Moon)"
+        shani_status = "Ashtama Shani"
     elif house_from_moon == 4:
-        shani_status = "Kantaka Shani (Saturn in 4th from Moon)"
+        shani_status = "Kantaka Shani"
     elif house_from_moon == 1:
-        shani_status = "Janma Shani (Saturn in Moon sign)"
+        shani_status = "Janma Shani"
     elif house_from_moon == 12:
-        shani_status = "Sade Sati Phase 1 (12th from Moon)"
+        shani_status = "Sade Sati Phase 1"
     elif house_from_moon == 2:
-        shani_status = "Sade Sati Phase 3 (2nd from Moon)"
+        shani_status = "Sade Sati Phase 3"
 
-    birth_md_index = nak_index % 9
-    birth_md = dasha_sequence[birth_md_index]
+    return render_template("result.html",
+                           name=name,
+                           nakshatra=nakshatras[nak_index],
+                           pada=pada,
+                           rasi=rasi_list[rasi_index],
+                           lagna=lagna,
+                           shani_status=shani_status,
+                           report_type=report_type,
+                           place=place,
+                           country=country)
 
-    balance_years = (1 - (degrees_into_nak / nak_span)) * dasha_years[birth_md]
 
-    age_years = (datetime.now() - dt).days / 365.25
-
-    if age_years < balance_years:
-        running_md = birth_md
-    else:
-        temp = age_years - balance_years
-        idx = (birth_md_index + 1) % 9
-
-        while temp >= dasha_years[dasha_sequence[idx]]:
-            temp -= dasha_years[dasha_sequence[idx]]
-            idx = (idx + 1) % 9
-
-        running_md = dasha_sequence[idx]
-
-    return render_template(
-        "result.html",
-        name=name,
-        nakshatra=nakshatras[nak_index],
-        pada=pada,
-        rasi=rasi_list[rasi_index],
-        lagna=lagna,
-        birth_md=birth_md,
-        running_md=running_md,
-        shani_status=shani_status,
-        report_type=report_type,
-        place=place,
-        country=country
-    )
-
-   @app.route("/ping")
-   def ping():
+# ✅ FIXED PING ROUTE
+@app.route("/ping")
+def ping():
     return "alive"
-       
-   if __name__ == "__main__":
 
+
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-
-    app.run(
-        host="0.0.0.0",
-        port=port
-    )
+    app.run(host="0.0.0.0", port=port)
