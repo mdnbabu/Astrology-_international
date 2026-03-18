@@ -51,24 +51,6 @@ dasha_years = {
 def ping():
     return "pong", 200
 
-# ── Test result page – no payment needed ─────────────────────────────────────
-@app.route("/test_result")
-def test_result():
-    return render_template(
-        "result.html",
-        name="Test User",
-        nakshatra="Rohini",
-        pada=2,
-        rasi="Vrishabha",
-        lagna="Mesha",
-        birth_md="Venus",
-        running_md="Sun",
-        shani_status="No Saturn Dosha",
-        report_type="basic",
-        place="London",
-        country="United Kingdom"
-    )
-
 @app.route("/")
 def index():
     return render_template("index.html")
