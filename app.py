@@ -51,6 +51,24 @@ dasha_years = {
 def ping():
     return "pong", 200
 
+# ── Test result page – no payment needed ─────────────────────────────────────
+@app.route("/test_result")
+def test_result():
+    return render_template(
+        "result.html",
+        name="Test User",
+        nakshatra="Rohini",
+        pada=2,
+        rasi="Vrishabha",
+        lagna="Mesha",
+        birth_md="Venus",
+        running_md="Sun",
+        shani_status="No Saturn Dosha",
+        report_type="basic",
+        place="London",
+        country="United Kingdom"
+    )
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -82,7 +100,6 @@ def payment():
 
     report_type = request.form.get("report_type")
 
-    # ✅ Updated prices: Basic $5, Detailed $10
     if report_type == "detailed":
         amount  = 1000
         display = "$10"
@@ -213,4 +230,4 @@ def result():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-    
+        
