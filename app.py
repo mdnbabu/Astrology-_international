@@ -83,8 +83,8 @@ def payment():
     report_type = request.form.get("report_type")
 
     if report_type == "detailed":
-        amount  = 1000
-        display = "$10"
+        amount  = 5000
+        display = "$50"
     else:
         amount  = 500
         display = "$5"
